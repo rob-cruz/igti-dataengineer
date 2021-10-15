@@ -1,0 +1,284 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "Untitled19.ipynb",
+      "provenance": [],
+      "authorship_tag": "ABX9TyMF/sIgUHazp8U5eZ9RFCBy",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/rob-cruz/igti-dataengineer/blob/main/coleta_dados_twitter\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "dOHnyTDuBCkl"
+      },
+      "source": [
+        ""
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "7h2i90tSBQkg"
+      },
+      "source": [
+        ""
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "YSQ0bzhtBfc0"
+      },
+      "source": [
+        "#importação de libs\n",
+        "#http://docs.tweepy.org/en/v3.5.0/api.html\n",
+        "import tweepy"
+      ],
+      "execution_count": 1,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "XiAga1BVBfZi"
+      },
+      "source": [
+        "#credenciais geradas na api do twitter\n",
+        "API_KEY = \"Wke4EWeVPDRDZdYCExntVtCVt\"\n",
+        "API_KEY_SECRET = \"FnqnX6lWpswIJwx9b4zxB7rDNFdbIQt6wIcBYxtwfLBu2x8ot3\"\n",
+        "BEARER_TOKEN = \"AAAAAAAAAAAAAAAAAAAAACrgUgEAAAAAXW05WTJDZHnsbYU9PpUtzmLx8io%3D8aDzGI3LKfb09HjHsGTpu9VLKlgYodwNuGKIkzRjVEvLVQs0po\"\n",
+        "Access_Token_Secret = \"Rc2Oy1O4sMo9n9UdFu40vOzBnURs0aFiayhrg6WQnZYOH\"\n",
+        "ACCES_TOKEN = \"273740136-iGQCSVXK27h1C9VFes3vsUMKlNTNco18NuNTLHqG\""
+      ],
+      "execution_count": 2,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "QuUoXux7BfVz"
+      },
+      "source": [
+        "#autenticação\n",
+        "#gera autenticação\n",
+        "auth = tweepy.OAuthHandler(API_KEY, API_KEY_SECRET )\n",
+        "#cria instancia de autenticação\n",
+        "auth.set_access_token(ACCES_TOKEN, Access_Token_Secret)\n",
+        "#instancia da API\n",
+        "api = tweepy.API(auth)"
+      ],
+      "execution_count": 3,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "q9xdNOaOBfS4"
+      },
+      "source": [
+        "userName =\"Eurobcruz\" \n",
+        "userID = \"rob_dcruz\""
+      ],
+      "execution_count": 13,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "BtVKiXr_B7cy"
+      },
+      "source": [
+        "user_tweet = api.user_timeline(screen_name=userID,\n",
+        "                              count=200,\n",
+        "                              include_rts = False,\n",
+        "                              tweet_mode = 'extended',\n",
+        "                               \n",
+        "                              )"
+      ],
+      "execution_count": 20,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "KfK6osl_BfN_"
+      },
+      "source": [
+        "user_tweet"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "M7VcHiCOBfK8",
+        "outputId": "d8489e12-9bed-48af-a69b-12fb9a75be9d"
+      },
+      "source": [
+        "for user_tweet in user_tweet[:3]:\n",
+        "    print(\"ID: {}\" .format(user_tweet))\n",
+        "    print(user_tweet.created_at)\n",
+        "    print(user_tweet.full_text + \"\\n\")\n",
+        "    "
+      ],
+      "execution_count": 21,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "ID: Status(_api=<tweepy.api.API object at 0x7fa59df55850>, _json={'created_at': 'Sat Nov 14 01:02:05 +0000 2020', 'id': 1327416479529230347, 'id_str': '1327416479529230347', 'full_text': '@pensadorgabriel estou terrivelmente ansioso por \"Tô feliz, Matei o Presidente 3\"', 'truncated': False, 'display_text_range': [0, 81], 'entities': {'hashtags': [], 'symbols': [], 'user_mentions': [{'screen_name': 'pensadorgabriel', 'name': 'Gabriel o Pensador', 'id': 69470574, 'id_str': '69470574', 'indices': [0, 16]}], 'urls': []}, 'source': '<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>', 'in_reply_to_status_id': None, 'in_reply_to_status_id_str': None, 'in_reply_to_user_id': 69470574, 'in_reply_to_user_id_str': '69470574', 'in_reply_to_screen_name': 'pensadorgabriel', 'user': {'id': 273740136, 'id_str': '273740136', 'name': 'Eurobcruz', 'screen_name': 'rob_dcruz', 'location': 'Sampa - Brasil', 'description': 'Publicitário de formação analista de dados por ofício , fascinado por História e por histórias, baixista frustrado  e curioso a cerca de tudo.', 'url': None, 'entities': {'description': {'urls': []}}, 'protected': False, 'followers_count': 60, 'friends_count': 122, 'listed_count': 4, 'created_at': 'Tue Mar 29 02:23:16 +0000 2011', 'favourites_count': 142, 'utc_offset': None, 'time_zone': None, 'geo_enabled': True, 'verified': False, 'statuses_count': 501, 'lang': None, 'contributors_enabled': False, 'is_translator': False, 'is_translation_enabled': False, 'profile_background_color': '000000', 'profile_background_image_url': 'http://abs.twimg.com/images/themes/theme14/bg.gif', 'profile_background_image_url_https': 'https://abs.twimg.com/images/themes/theme14/bg.gif', 'profile_background_tile': True, 'profile_image_url': 'http://pbs.twimg.com/profile_images/556891175886790658/_M0fTQsN_normal.jpeg', 'profile_image_url_https': 'https://pbs.twimg.com/profile_images/556891175886790658/_M0fTQsN_normal.jpeg', 'profile_banner_url': 'https://pbs.twimg.com/profile_banners/273740136/1516456857', 'profile_link_color': '4A913C', 'profile_sidebar_border_color': '000000', 'profile_sidebar_fill_color': '000000', 'profile_text_color': '000000', 'profile_use_background_image': True, 'has_extended_profile': False, 'default_profile': False, 'default_profile_image': False, 'following': False, 'follow_request_sent': False, 'notifications': False, 'translator_type': 'none', 'withheld_in_countries': []}, 'geo': None, 'coordinates': None, 'place': None, 'contributors': None, 'is_quote_status': False, 'retweet_count': 0, 'favorite_count': 0, 'favorited': False, 'retweeted': False, 'lang': 'pt'}, created_at=datetime.datetime(2020, 11, 14, 1, 2, 5), id=1327416479529230347, id_str='1327416479529230347', full_text='@pensadorgabriel estou terrivelmente ansioso por \"Tô feliz, Matei o Presidente 3\"', truncated=False, display_text_range=[0, 81], entities={'hashtags': [], 'symbols': [], 'user_mentions': [{'screen_name': 'pensadorgabriel', 'name': 'Gabriel o Pensador', 'id': 69470574, 'id_str': '69470574', 'indices': [0, 16]}], 'urls': []}, source='Twitter for Android', source_url='http://twitter.com/download/android', in_reply_to_status_id=None, in_reply_to_status_id_str=None, in_reply_to_user_id=69470574, in_reply_to_user_id_str='69470574', in_reply_to_screen_name='pensadorgabriel', author=User(_api=<tweepy.api.API object at 0x7fa59df55850>, _json={'id': 273740136, 'id_str': '273740136', 'name': 'Eurobcruz', 'screen_name': 'rob_dcruz', 'location': 'Sampa - Brasil', 'description': 'Publicitário de formação analista de dados por ofício , fascinado por História e por histórias, baixista frustrado  e curioso a cerca de tudo.', 'url': None, 'entities': {'description': {'urls': []}}, 'protected': False, 'followers_count': 60, 'friends_count': 122, 'listed_count': 4, 'created_at': 'Tue Mar 29 02:23:16 +0000 2011', 'favourites_count': 142, 'utc_offset': None, 'time_zone': None, 'geo_enabled': True, 'verified': False, 'statuses_count': 501, 'lang': None, 'contributors_enabled': False, 'is_translator': False, 'is_translation_enabled': False, 'profile_background_color': '000000', 'profile_background_image_url': 'http://abs.twimg.com/images/themes/theme14/bg.gif', 'profile_background_image_url_https': 'https://abs.twimg.com/images/themes/theme14/bg.gif', 'profile_background_tile': True, 'profile_image_url': 'http://pbs.twimg.com/profile_images/556891175886790658/_M0fTQsN_normal.jpeg', 'profile_image_url_https': 'https://pbs.twimg.com/profile_images/556891175886790658/_M0fTQsN_normal.jpeg', 'profile_banner_url': 'https://pbs.twimg.com/profile_banners/273740136/1516456857', 'profile_link_color': '4A913C', 'profile_sidebar_border_color': '000000', 'profile_sidebar_fill_color': '000000', 'profile_text_color': '000000', 'profile_use_background_image': True, 'has_extended_profile': False, 'default_profile': False, 'default_profile_image': False, 'following': False, 'follow_request_sent': False, 'notifications': False, 'translator_type': 'none', 'withheld_in_countries': []}, id=273740136, id_str='273740136', name='Eurobcruz', screen_name='rob_dcruz', location='Sampa - Brasil', description='Publicitário de formação analista de dados por ofício , fascinado por História e por histórias, baixista frustrado  e curioso a cerca de tudo.', url=None, entities={'description': {'urls': []}}, protected=False, followers_count=60, friends_count=122, listed_count=4, created_at=datetime.datetime(2011, 3, 29, 2, 23, 16), favourites_count=142, utc_offset=None, time_zone=None, geo_enabled=True, verified=False, statuses_count=501, lang=None, contributors_enabled=False, is_translator=False, is_translation_enabled=False, profile_background_color='000000', profile_background_image_url='http://abs.twimg.com/images/themes/theme14/bg.gif', profile_background_image_url_https='https://abs.twimg.com/images/themes/theme14/bg.gif', profile_background_tile=True, profile_image_url='http://pbs.twimg.com/profile_images/556891175886790658/_M0fTQsN_normal.jpeg', profile_image_url_https='https://pbs.twimg.com/profile_images/556891175886790658/_M0fTQsN_normal.jpeg', profile_banner_url='https://pbs.twimg.com/profile_banners/273740136/1516456857', profile_link_color='4A913C', profile_sidebar_border_color='000000', profile_sidebar_fill_color='000000', profile_text_color='000000', profile_use_background_image=True, has_extended_profile=False, default_profile=False, default_profile_image=False, following=False, follow_request_sent=False, notifications=False, translator_type='none', withheld_in_countries=[]), user=User(_api=<tweepy.api.API object at 0x7fa59df55850>, _json={'id': 273740136, 'id_str': '273740136', 'name': 'Eurobcruz', 'screen_name': 'rob_dcruz', 'location': 'Sampa - Brasil', 'description': 'Publicitário de formação analista de dados por ofício , fascinado por História e por histórias, baixista frustrado  e curioso a cerca de tudo.', 'url': None, 'entities': {'description': {'urls': []}}, 'protected': False, 'followers_count': 60, 'friends_count': 122, 'listed_count': 4, 'created_at': 'Tue Mar 29 02:23:16 +0000 2011', 'favourites_count': 142, 'utc_offset': None, 'time_zone': None, 'geo_enabled': True, 'verified': False, 'statuses_count': 501, 'lang': None, 'contributors_enabled': False, 'is_translator': False, 'is_translation_enabled': False, 'profile_background_color': '000000', 'profile_background_image_url': 'http://abs.twimg.com/images/themes/theme14/bg.gif', 'profile_background_image_url_https': 'https://abs.twimg.com/images/themes/theme14/bg.gif', 'profile_background_tile': True, 'profile_image_url': 'http://pbs.twimg.com/profile_images/556891175886790658/_M0fTQsN_normal.jpeg', 'profile_image_url_https': 'https://pbs.twimg.com/profile_images/556891175886790658/_M0fTQsN_normal.jpeg', 'profile_banner_url': 'https://pbs.twimg.com/profile_banners/273740136/1516456857', 'profile_link_color': '4A913C', 'profile_sidebar_border_color': '000000', 'profile_sidebar_fill_color': '000000', 'profile_text_color': '000000', 'profile_use_background_image': True, 'has_extended_profile': False, 'default_profile': False, 'default_profile_image': False, 'following': False, 'follow_request_sent': False, 'notifications': False, 'translator_type': 'none', 'withheld_in_countries': []}, id=273740136, id_str='273740136', name='Eurobcruz', screen_name='rob_dcruz', location='Sampa - Brasil', description='Publicitário de formação analista de dados por ofício , fascinado por História e por histórias, baixista frustrado  e curioso a cerca de tudo.', url=None, entities={'description': {'urls': []}}, protected=False, followers_count=60, friends_count=122, listed_count=4, created_at=datetime.datetime(2011, 3, 29, 2, 23, 16), favourites_count=142, utc_offset=None, time_zone=None, geo_enabled=True, verified=False, statuses_count=501, lang=None, contributors_enabled=False, is_translator=False, is_translation_enabled=False, profile_background_color='000000', profile_background_image_url='http://abs.twimg.com/images/themes/theme14/bg.gif', profile_background_image_url_https='https://abs.twimg.com/images/themes/theme14/bg.gif', profile_background_tile=True, profile_image_url='http://pbs.twimg.com/profile_images/556891175886790658/_M0fTQsN_normal.jpeg', profile_image_url_https='https://pbs.twimg.com/profile_images/556891175886790658/_M0fTQsN_normal.jpeg', profile_banner_url='https://pbs.twimg.com/profile_banners/273740136/1516456857', profile_link_color='4A913C', profile_sidebar_border_color='000000', profile_sidebar_fill_color='000000', profile_text_color='000000', profile_use_background_image=True, has_extended_profile=False, default_profile=False, default_profile_image=False, following=False, follow_request_sent=False, notifications=False, translator_type='none', withheld_in_countries=[]), geo=None, coordinates=None, place=None, contributors=None, is_quote_status=False, retweet_count=0, favorite_count=0, favorited=False, retweeted=False, lang='pt')\n",
+            "2020-11-14 01:02:05\n",
+            "@pensadorgabriel estou terrivelmente ansioso por \"Tô feliz, Matei o Presidente 3\"\n",
+            "\n",
+            "ID: Status(_api=<tweepy.api.API object at 0x7fa59df55850>, _json={'created_at': 'Thu Jul 09 16:52:25 +0000 2020', 'id': 1281269990033932290, 'id_str': '1281269990033932290', 'full_text': 'https://t.co/eeJ74g0CYS', 'truncated': False, 'display_text_range': [0, 23], 'entities': {'hashtags': [], 'symbols': [], 'user_mentions': [], 'urls': [{'url': 'https://t.co/eeJ74g0CYS', 'expanded_url': 'https://almapreta.com/editorias/realidade/mes-da-mulher-negra-e-celebrado-com-rodas-de-conversa-e-sessoes-de-musica-online', 'display_url': 'almapreta.com/editorias/real…', 'indices': [0, 23]}]}, 'source': '<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>', 'in_reply_to_status_id': None, 'in_reply_to_status_id_str': None, 'in_reply_to_user_id': None, 'in_reply_to_user_id_str': None, 'in_reply_to_screen_name': None, 'user': {'id': 273740136, 'id_str': '273740136', 'name': 'Eurobcruz', 'screen_name': 'rob_dcruz', 'location': 'Sampa - Brasil', 'description': 'Publicitário de formação analista de dados por ofício , fascinado por História e por histórias, baixista frustrado  e curioso a cerca de tudo.', 'url': None, 'entities': {'description': {'urls': []}}, 'protected': False, 'followers_count': 60, 'friends_count': 122, 'listed_count': 4, 'created_at': 'Tue Mar 29 02:23:16 +0000 2011', 'favourites_count': 142, 'utc_offset': None, 'time_zone': None, 'geo_enabled': True, 'verified': False, 'statuses_count': 501, 'lang': None, 'contributors_enabled': False, 'is_translator': False, 'is_translation_enabled': False, 'profile_background_color': '000000', 'profile_background_image_url': 'http://abs.twimg.com/images/themes/theme14/bg.gif', 'profile_background_image_url_https': 'https://abs.twimg.com/images/themes/theme14/bg.gif', 'profile_background_tile': True, 'profile_image_url': 'http://pbs.twimg.com/profile_images/556891175886790658/_M0fTQsN_normal.jpeg', 'profile_image_url_https': 'https://pbs.twimg.com/profile_images/556891175886790658/_M0fTQsN_normal.jpeg', 'profile_banner_url': 'https://pbs.twimg.com/profile_banners/273740136/1516456857', 'profile_link_color': '4A913C', 'profile_sidebar_border_color': '000000', 'profile_sidebar_fill_color': '000000', 'profile_text_color': '000000', 'profile_use_background_image': True, 'has_extended_profile': False, 'default_profile': False, 'default_profile_image': False, 'following': False, 'follow_request_sent': False, 'notifications': False, 'translator_type': 'none', 'withheld_in_countries': []}, 'geo': None, 'coordinates': None, 'place': None, 'contributors': None, 'is_quote_status': False, 'retweet_count': 0, 'favorite_count': 0, 'favorited': False, 'retweeted': False, 'possibly_sensitive': False, 'lang': 'und'}, created_at=datetime.datetime(2020, 7, 9, 16, 52, 25), id=1281269990033932290, id_str='1281269990033932290', full_text='https://t.co/eeJ74g0CYS', truncated=False, display_text_range=[0, 23], entities={'hashtags': [], 'symbols': [], 'user_mentions': [], 'urls': [{'url': 'https://t.co/eeJ74g0CYS', 'expanded_url': 'https://almapreta.com/editorias/realidade/mes-da-mulher-negra-e-celebrado-com-rodas-de-conversa-e-sessoes-de-musica-online', 'display_url': 'almapreta.com/editorias/real…', 'indices': [0, 23]}]}, source='Twitter for Android', source_url='http://twitter.com/download/android', in_reply_to_status_id=None, in_reply_to_status_id_str=None, in_reply_to_user_id=None, in_reply_to_user_id_str=None, in_reply_to_screen_name=None, author=User(_api=<tweepy.api.API object at 0x7fa59df55850>, _json={'id': 273740136, 'id_str': '273740136', 'name': 'Eurobcruz', 'screen_name': 'rob_dcruz', 'location': 'Sampa - Brasil', 'description': 'Publicitário de formação analista de dados por ofício , fascinado por História e por histórias, baixista frustrado  e curioso a cerca de tudo.', 'url': None, 'entities': {'description': {'urls': []}}, 'protected': False, 'followers_count': 60, 'friends_count': 122, 'listed_count': 4, 'created_at': 'Tue Mar 29 02:23:16 +0000 2011', 'favourites_count': 142, 'utc_offset': None, 'time_zone': None, 'geo_enabled': True, 'verified': False, 'statuses_count': 501, 'lang': None, 'contributors_enabled': False, 'is_translator': False, 'is_translation_enabled': False, 'profile_background_color': '000000', 'profile_background_image_url': 'http://abs.twimg.com/images/themes/theme14/bg.gif', 'profile_background_image_url_https': 'https://abs.twimg.com/images/themes/theme14/bg.gif', 'profile_background_tile': True, 'profile_image_url': 'http://pbs.twimg.com/profile_images/556891175886790658/_M0fTQsN_normal.jpeg', 'profile_image_url_https': 'https://pbs.twimg.com/profile_images/556891175886790658/_M0fTQsN_normal.jpeg', 'profile_banner_url': 'https://pbs.twimg.com/profile_banners/273740136/1516456857', 'profile_link_color': '4A913C', 'profile_sidebar_border_color': '000000', 'profile_sidebar_fill_color': '000000', 'profile_text_color': '000000', 'profile_use_background_image': True, 'has_extended_profile': False, 'default_profile': False, 'default_profile_image': False, 'following': False, 'follow_request_sent': False, 'notifications': False, 'translator_type': 'none', 'withheld_in_countries': []}, id=273740136, id_str='273740136', name='Eurobcruz', screen_name='rob_dcruz', location='Sampa - Brasil', description='Publicitário de formação analista de dados por ofício , fascinado por História e por histórias, baixista frustrado  e curioso a cerca de tudo.', url=None, entities={'description': {'urls': []}}, protected=False, followers_count=60, friends_count=122, listed_count=4, created_at=datetime.datetime(2011, 3, 29, 2, 23, 16), favourites_count=142, utc_offset=None, time_zone=None, geo_enabled=True, verified=False, statuses_count=501, lang=None, contributors_enabled=False, is_translator=False, is_translation_enabled=False, profile_background_color='000000', profile_background_image_url='http://abs.twimg.com/images/themes/theme14/bg.gif', profile_background_image_url_https='https://abs.twimg.com/images/themes/theme14/bg.gif', profile_background_tile=True, profile_image_url='http://pbs.twimg.com/profile_images/556891175886790658/_M0fTQsN_normal.jpeg', profile_image_url_https='https://pbs.twimg.com/profile_images/556891175886790658/_M0fTQsN_normal.jpeg', profile_banner_url='https://pbs.twimg.com/profile_banners/273740136/1516456857', profile_link_color='4A913C', profile_sidebar_border_color='000000', profile_sidebar_fill_color='000000', profile_text_color='000000', profile_use_background_image=True, has_extended_profile=False, default_profile=False, default_profile_image=False, following=False, follow_request_sent=False, notifications=False, translator_type='none', withheld_in_countries=[]), user=User(_api=<tweepy.api.API object at 0x7fa59df55850>, _json={'id': 273740136, 'id_str': '273740136', 'name': 'Eurobcruz', 'screen_name': 'rob_dcruz', 'location': 'Sampa - Brasil', 'description': 'Publicitário de formação analista de dados por ofício , fascinado por História e por histórias, baixista frustrado  e curioso a cerca de tudo.', 'url': None, 'entities': {'description': {'urls': []}}, 'protected': False, 'followers_count': 60, 'friends_count': 122, 'listed_count': 4, 'created_at': 'Tue Mar 29 02:23:16 +0000 2011', 'favourites_count': 142, 'utc_offset': None, 'time_zone': None, 'geo_enabled': True, 'verified': False, 'statuses_count': 501, 'lang': None, 'contributors_enabled': False, 'is_translator': False, 'is_translation_enabled': False, 'profile_background_color': '000000', 'profile_background_image_url': 'http://abs.twimg.com/images/themes/theme14/bg.gif', 'profile_background_image_url_https': 'https://abs.twimg.com/images/themes/theme14/bg.gif', 'profile_background_tile': True, 'profile_image_url': 'http://pbs.twimg.com/profile_images/556891175886790658/_M0fTQsN_normal.jpeg', 'profile_image_url_https': 'https://pbs.twimg.com/profile_images/556891175886790658/_M0fTQsN_normal.jpeg', 'profile_banner_url': 'https://pbs.twimg.com/profile_banners/273740136/1516456857', 'profile_link_color': '4A913C', 'profile_sidebar_border_color': '000000', 'profile_sidebar_fill_color': '000000', 'profile_text_color': '000000', 'profile_use_background_image': True, 'has_extended_profile': False, 'default_profile': False, 'default_profile_image': False, 'following': False, 'follow_request_sent': False, 'notifications': False, 'translator_type': 'none', 'withheld_in_countries': []}, id=273740136, id_str='273740136', name='Eurobcruz', screen_name='rob_dcruz', location='Sampa - Brasil', description='Publicitário de formação analista de dados por ofício , fascinado por História e por histórias, baixista frustrado  e curioso a cerca de tudo.', url=None, entities={'description': {'urls': []}}, protected=False, followers_count=60, friends_count=122, listed_count=4, created_at=datetime.datetime(2011, 3, 29, 2, 23, 16), favourites_count=142, utc_offset=None, time_zone=None, geo_enabled=True, verified=False, statuses_count=501, lang=None, contributors_enabled=False, is_translator=False, is_translation_enabled=False, profile_background_color='000000', profile_background_image_url='http://abs.twimg.com/images/themes/theme14/bg.gif', profile_background_image_url_https='https://abs.twimg.com/images/themes/theme14/bg.gif', profile_background_tile=True, profile_image_url='http://pbs.twimg.com/profile_images/556891175886790658/_M0fTQsN_normal.jpeg', profile_image_url_https='https://pbs.twimg.com/profile_images/556891175886790658/_M0fTQsN_normal.jpeg', profile_banner_url='https://pbs.twimg.com/profile_banners/273740136/1516456857', profile_link_color='4A913C', profile_sidebar_border_color='000000', profile_sidebar_fill_color='000000', profile_text_color='000000', profile_use_background_image=True, has_extended_profile=False, default_profile=False, default_profile_image=False, following=False, follow_request_sent=False, notifications=False, translator_type='none', withheld_in_countries=[]), geo=None, coordinates=None, place=None, contributors=None, is_quote_status=False, retweet_count=0, favorite_count=0, favorited=False, retweeted=False, possibly_sensitive=False, lang='und')\n",
+            "2020-07-09 16:52:25\n",
+            "https://t.co/eeJ74g0CYS\n",
+            "\n",
+            "ID: Status(_api=<tweepy.api.API object at 0x7fa59df55850>, _json={'created_at': 'Mon May 25 19:10:51 +0000 2020', 'id': 1264997374209871872, 'id_str': '1264997374209871872', 'full_text': 'Acabou de publicar um vídeo https://t.co/4bYjikrZOD', 'truncated': False, 'display_text_range': [0, 51], 'entities': {'hashtags': [], 'symbols': [], 'user_mentions': [], 'urls': [{'url': 'https://t.co/4bYjikrZOD', 'expanded_url': 'https://www.instagram.com/p/CAn0DhcA797Y7lQS6OsBwXiWNzc7SWcitkDb900/?igshid=1jxvi7gpbpxs0', 'display_url': 'instagram.com/p/CAn0DhcA797Y…', 'indices': [28, 51]}]}, 'source': '<a href=\"http://instagram.com\" rel=\"nofollow\">Instagram</a>', 'in_reply_to_status_id': None, 'in_reply_to_status_id_str': None, 'in_reply_to_user_id': None, 'in_reply_to_user_id_str': None, 'in_reply_to_screen_name': None, 'user': {'id': 273740136, 'id_str': '273740136', 'name': 'Eurobcruz', 'screen_name': 'rob_dcruz', 'location': 'Sampa - Brasil', 'description': 'Publicitário de formação analista de dados por ofício , fascinado por História e por histórias, baixista frustrado  e curioso a cerca de tudo.', 'url': None, 'entities': {'description': {'urls': []}}, 'protected': False, 'followers_count': 60, 'friends_count': 122, 'listed_count': 4, 'created_at': 'Tue Mar 29 02:23:16 +0000 2011', 'favourites_count': 142, 'utc_offset': None, 'time_zone': None, 'geo_enabled': True, 'verified': False, 'statuses_count': 501, 'lang': None, 'contributors_enabled': False, 'is_translator': False, 'is_translation_enabled': False, 'profile_background_color': '000000', 'profile_background_image_url': 'http://abs.twimg.com/images/themes/theme14/bg.gif', 'profile_background_image_url_https': 'https://abs.twimg.com/images/themes/theme14/bg.gif', 'profile_background_tile': True, 'profile_image_url': 'http://pbs.twimg.com/profile_images/556891175886790658/_M0fTQsN_normal.jpeg', 'profile_image_url_https': 'https://pbs.twimg.com/profile_images/556891175886790658/_M0fTQsN_normal.jpeg', 'profile_banner_url': 'https://pbs.twimg.com/profile_banners/273740136/1516456857', 'profile_link_color': '4A913C', 'profile_sidebar_border_color': '000000', 'profile_sidebar_fill_color': '000000', 'profile_text_color': '000000', 'profile_use_background_image': True, 'has_extended_profile': False, 'default_profile': False, 'default_profile_image': False, 'following': False, 'follow_request_sent': False, 'notifications': False, 'translator_type': 'none', 'withheld_in_countries': []}, 'geo': None, 'coordinates': None, 'place': None, 'contributors': None, 'is_quote_status': False, 'retweet_count': 0, 'favorite_count': 0, 'favorited': False, 'retweeted': False, 'possibly_sensitive': False, 'lang': 'pt'}, created_at=datetime.datetime(2020, 5, 25, 19, 10, 51), id=1264997374209871872, id_str='1264997374209871872', full_text='Acabou de publicar um vídeo https://t.co/4bYjikrZOD', truncated=False, display_text_range=[0, 51], entities={'hashtags': [], 'symbols': [], 'user_mentions': [], 'urls': [{'url': 'https://t.co/4bYjikrZOD', 'expanded_url': 'https://www.instagram.com/p/CAn0DhcA797Y7lQS6OsBwXiWNzc7SWcitkDb900/?igshid=1jxvi7gpbpxs0', 'display_url': 'instagram.com/p/CAn0DhcA797Y…', 'indices': [28, 51]}]}, source='Instagram', source_url='http://instagram.com', in_reply_to_status_id=None, in_reply_to_status_id_str=None, in_reply_to_user_id=None, in_reply_to_user_id_str=None, in_reply_to_screen_name=None, author=User(_api=<tweepy.api.API object at 0x7fa59df55850>, _json={'id': 273740136, 'id_str': '273740136', 'name': 'Eurobcruz', 'screen_name': 'rob_dcruz', 'location': 'Sampa - Brasil', 'description': 'Publicitário de formação analista de dados por ofício , fascinado por História e por histórias, baixista frustrado  e curioso a cerca de tudo.', 'url': None, 'entities': {'description': {'urls': []}}, 'protected': False, 'followers_count': 60, 'friends_count': 122, 'listed_count': 4, 'created_at': 'Tue Mar 29 02:23:16 +0000 2011', 'favourites_count': 142, 'utc_offset': None, 'time_zone': None, 'geo_enabled': True, 'verified': False, 'statuses_count': 501, 'lang': None, 'contributors_enabled': False, 'is_translator': False, 'is_translation_enabled': False, 'profile_background_color': '000000', 'profile_background_image_url': 'http://abs.twimg.com/images/themes/theme14/bg.gif', 'profile_background_image_url_https': 'https://abs.twimg.com/images/themes/theme14/bg.gif', 'profile_background_tile': True, 'profile_image_url': 'http://pbs.twimg.com/profile_images/556891175886790658/_M0fTQsN_normal.jpeg', 'profile_image_url_https': 'https://pbs.twimg.com/profile_images/556891175886790658/_M0fTQsN_normal.jpeg', 'profile_banner_url': 'https://pbs.twimg.com/profile_banners/273740136/1516456857', 'profile_link_color': '4A913C', 'profile_sidebar_border_color': '000000', 'profile_sidebar_fill_color': '000000', 'profile_text_color': '000000', 'profile_use_background_image': True, 'has_extended_profile': False, 'default_profile': False, 'default_profile_image': False, 'following': False, 'follow_request_sent': False, 'notifications': False, 'translator_type': 'none', 'withheld_in_countries': []}, id=273740136, id_str='273740136', name='Eurobcruz', screen_name='rob_dcruz', location='Sampa - Brasil', description='Publicitário de formação analista de dados por ofício , fascinado por História e por histórias, baixista frustrado  e curioso a cerca de tudo.', url=None, entities={'description': {'urls': []}}, protected=False, followers_count=60, friends_count=122, listed_count=4, created_at=datetime.datetime(2011, 3, 29, 2, 23, 16), favourites_count=142, utc_offset=None, time_zone=None, geo_enabled=True, verified=False, statuses_count=501, lang=None, contributors_enabled=False, is_translator=False, is_translation_enabled=False, profile_background_color='000000', profile_background_image_url='http://abs.twimg.com/images/themes/theme14/bg.gif', profile_background_image_url_https='https://abs.twimg.com/images/themes/theme14/bg.gif', profile_background_tile=True, profile_image_url='http://pbs.twimg.com/profile_images/556891175886790658/_M0fTQsN_normal.jpeg', profile_image_url_https='https://pbs.twimg.com/profile_images/556891175886790658/_M0fTQsN_normal.jpeg', profile_banner_url='https://pbs.twimg.com/profile_banners/273740136/1516456857', profile_link_color='4A913C', profile_sidebar_border_color='000000', profile_sidebar_fill_color='000000', profile_text_color='000000', profile_use_background_image=True, has_extended_profile=False, default_profile=False, default_profile_image=False, following=False, follow_request_sent=False, notifications=False, translator_type='none', withheld_in_countries=[]), user=User(_api=<tweepy.api.API object at 0x7fa59df55850>, _json={'id': 273740136, 'id_str': '273740136', 'name': 'Eurobcruz', 'screen_name': 'rob_dcruz', 'location': 'Sampa - Brasil', 'description': 'Publicitário de formação analista de dados por ofício , fascinado por História e por histórias, baixista frustrado  e curioso a cerca de tudo.', 'url': None, 'entities': {'description': {'urls': []}}, 'protected': False, 'followers_count': 60, 'friends_count': 122, 'listed_count': 4, 'created_at': 'Tue Mar 29 02:23:16 +0000 2011', 'favourites_count': 142, 'utc_offset': None, 'time_zone': None, 'geo_enabled': True, 'verified': False, 'statuses_count': 501, 'lang': None, 'contributors_enabled': False, 'is_translator': False, 'is_translation_enabled': False, 'profile_background_color': '000000', 'profile_background_image_url': 'http://abs.twimg.com/images/themes/theme14/bg.gif', 'profile_background_image_url_https': 'https://abs.twimg.com/images/themes/theme14/bg.gif', 'profile_background_tile': True, 'profile_image_url': 'http://pbs.twimg.com/profile_images/556891175886790658/_M0fTQsN_normal.jpeg', 'profile_image_url_https': 'https://pbs.twimg.com/profile_images/556891175886790658/_M0fTQsN_normal.jpeg', 'profile_banner_url': 'https://pbs.twimg.com/profile_banners/273740136/1516456857', 'profile_link_color': '4A913C', 'profile_sidebar_border_color': '000000', 'profile_sidebar_fill_color': '000000', 'profile_text_color': '000000', 'profile_use_background_image': True, 'has_extended_profile': False, 'default_profile': False, 'default_profile_image': False, 'following': False, 'follow_request_sent': False, 'notifications': False, 'translator_type': 'none', 'withheld_in_countries': []}, id=273740136, id_str='273740136', name='Eurobcruz', screen_name='rob_dcruz', location='Sampa - Brasil', description='Publicitário de formação analista de dados por ofício , fascinado por História e por histórias, baixista frustrado  e curioso a cerca de tudo.', url=None, entities={'description': {'urls': []}}, protected=False, followers_count=60, friends_count=122, listed_count=4, created_at=datetime.datetime(2011, 3, 29, 2, 23, 16), favourites_count=142, utc_offset=None, time_zone=None, geo_enabled=True, verified=False, statuses_count=501, lang=None, contributors_enabled=False, is_translator=False, is_translation_enabled=False, profile_background_color='000000', profile_background_image_url='http://abs.twimg.com/images/themes/theme14/bg.gif', profile_background_image_url_https='https://abs.twimg.com/images/themes/theme14/bg.gif', profile_background_tile=True, profile_image_url='http://pbs.twimg.com/profile_images/556891175886790658/_M0fTQsN_normal.jpeg', profile_image_url_https='https://pbs.twimg.com/profile_images/556891175886790658/_M0fTQsN_normal.jpeg', profile_banner_url='https://pbs.twimg.com/profile_banners/273740136/1516456857', profile_link_color='4A913C', profile_sidebar_border_color='000000', profile_sidebar_fill_color='000000', profile_text_color='000000', profile_use_background_image=True, has_extended_profile=False, default_profile=False, default_profile_image=False, following=False, follow_request_sent=False, notifications=False, translator_type='none', withheld_in_countries=[]), geo=None, coordinates=None, place=None, contributors=None, is_quote_status=False, retweet_count=0, favorite_count=0, favorited=False, retweeted=False, possibly_sensitive=False, lang='pt')\n",
+            "2020-05-25 19:10:51\n",
+            "Acabou de publicar um vídeo https://t.co/4bYjikrZOD\n",
+            "\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "YaoSPUkkBfIS"
+      },
+      "source": [
+        ""
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "KOquNKlWBfFn"
+      },
+      "source": [
+        ""
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "RPX55qw-BfC6"
+      },
+      "source": [
+        ""
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "pXXD0gHqBfAN"
+      },
+      "source": [
+        ""
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "rkx7cITaBe9k"
+      },
+      "source": [
+        ""
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "WctpbBSaBe68"
+      },
+      "source": [
+        ""
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "0HNzNnZrBe1b"
+      },
+      "source": [
+        ""
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "_InOvtbbBeyy"
+      },
+      "source": [
+        ""
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "JjOAHfIiBera"
+      },
+      "source": [
+        ""
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "AMQjhfcqBefz"
+      },
+      "source": [
+        ""
+      ],
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
